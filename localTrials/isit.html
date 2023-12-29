@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Rex UI</title>
+</head>
+<body style="background-color: rgba(7, 11, 40, 0.66);">
+    <h1 style="font-family: 'Times New Roman', Times, serif;">Rex basic UI</h1>
+
+    <div class="container">
+        <div class="output-container">
+            <label for="botResponse">Response:</label>
+            <div id="botResponse" class="response"></div>
+        </div>
+
+        <div class="input-container">
+            <label for="userInput">Input:</label>
+            <textarea id="userInput" rows="4"></textarea>
+            <button onclick="generateResponse()">Generate Response</button>
+        </div>
+    </div>
+
+    <script src="its.js"></script>
+</body>
+</html>
