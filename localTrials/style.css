@@ -77,3 +77,44 @@ button {
     max-height: 300px; /* Set a maximum height for the response container */
     overflow-y: auto; /* Enable vertical scrollbar if the content overflows */
 }
+
+.chat-history {
+    margin-bottom: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f96c;
+    clear: both;
+}
+
+.user-message {
+    float: right;
+    background-color: #c8d7d8;
+    color: #fff;
+}
+
+.bot-message {
+    float: left;
+    background-color: rgb(66, 62, 62);
+    color: #fff;
+}
+
+
+.past-history {
+    margin-bottom: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.past-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f96c;
+    clear: both;
+}

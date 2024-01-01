@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Rex UI</title>
 </head>
+
 <body style="background-color: rgba(7, 11, 40, 0.66);">
     <h1 style="font-family: 'Times New Roman', Times, serif;">Rex basic UI</h1>
 
+    <!-- View old chat sessions button and container -->
+    <button onclick="viewOldChatSessions()">View Old Chat Sessions</button>
+    <div class="old-sessions" id="oldSessions"></div>
+
     <div class="container">
+        <div class="past-history" id="pastHistory"></div> <!-- Added past history container -->
+
+        <div class="chat-history" id="chatHistory"></div> <!-- Added chat history container -->
+
         <div class="output-container">
             <label for="botResponse">Response:</label>
             <div id="botResponse" class="response"></div>
@@ -24,4 +34,5 @@
 
     <script src="its.js"></script>
 </body>
+
 </html>
