@@ -10,6 +10,7 @@ function sendMessage() {
     const userMessage = document.getElementById('userMessage').value;
     if (userMessage.trim() === '') return;
 
+    // Display the user message in the chat
     appendMessage('You', userMessage);
 
     // Make a POST request to the backend
@@ -23,6 +24,8 @@ function sendMessage() {
     .then(response => response.json())
     .then(data => {
         const botResponse = data.response;
+
+        // Display the bot's response in the chat
         appendMessage('Bot', botResponse);
     });
 
@@ -33,10 +36,7 @@ function sendMessage() {
 function appendMessage(sender, message) {
     const chatContainer = document.getElementById('chat');
     const messageElement = document.createElement('div');
-
-    // Add different CSS classes based on the sender
-    messageElement.classList.add(sender.toLowerCase()); // Assuming sender is 'User' or 'Bot'
-
+    messageElement.classList.add(sender.toLowerCase()); // Add a class for styling
     messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
     chatContainer.appendChild(messageElement);
 
