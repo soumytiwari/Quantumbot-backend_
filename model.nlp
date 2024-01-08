@@ -1,0 +1,712 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "a,joke,me,tell": {
+            "intent": "intent.joke",
+            "domain": "default"
+          },
+          "core,is,mission,quantumbot,what": {
+            "intent": "intent.mission",
+            "domain": "default"
+          },
+          "is,the,today,weather,what": {
+            "intent": "intent.weather",
+            "domain": "default"
+          },
+          "doe,how,photosynthesi,work": {
+            "intent": "intent.science",
+            "domain": "default"
+          },
+          "hello": {
+            "intent": "greetings.hello",
+            "domain": "default"
+          },
+          "hey": {
+            "intent": "greetings.hi",
+            "domain": "default"
+          },
+          "hi": {
+            "intent": "greetings.hi",
+            "domain": "default"
+          },
+          "are,how,you": {
+            "intent": "greetings.howAreYou",
+            "domain": "default"
+          },
+          "bye": {
+            "intent": "farewell.bye",
+            "domain": "default"
+          },
+          "goodby": {
+            "intent": "farewell.goodbye",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "intent.joke": "default",
+          "intent.mission": "default",
+          "intent.weather": "default",
+          "intent.science": "default",
+          "greetings.hello": "default",
+          "greetings.hi": "default",
+          "greetings.howAreYou": "default",
+          "farewell.bye": "default",
+          "farewell.goodbye": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "tell me a joke",
+            "intent": "intent.joke"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is Quantumbot Core Mission",
+            "intent": "intent.mission"
+          },
+          {
+            "domain": "default",
+            "utterance": "what is the weather today",
+            "intent": "intent.weather"
+          },
+          {
+            "domain": "default",
+            "utterance": "how does photosynthesis work",
+            "intent": "intent.science"
+          },
+          {
+            "domain": "default",
+            "utterance": "hello",
+            "intent": "greetings.hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "hey",
+            "intent": "greetings.hi"
+          },
+          {
+            "domain": "default",
+            "utterance": "hi",
+            "intent": "greetings.hi"
+          },
+          {
+            "domain": "default",
+            "utterance": "how are you",
+            "intent": "greetings.howAreYou"
+          },
+          {
+            "domain": "default",
+            "utterance": "bye",
+            "intent": "farewell.bye"
+          },
+          {
+            "domain": "default",
+            "utterance": "goodbye",
+            "intent": "farewell.goodbye"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "tell": 1,
+              "me": 1,
+              "a": 1,
+              "joke": 1,
+              "what": 1,
+              "is": 1,
+              "quantumbot": 1,
+              "core": 1,
+              "mission": 1,
+              "the": 1,
+              "weather": 1,
+              "today": 1,
+              "how": 1,
+              "doe": 1,
+              "photosynthesi": 1,
+              "work": 1,
+              "hello": 1,
+              "hey": 1,
+              "hi": 1,
+              "are": 1,
+              "you": 1,
+              "bye": 1,
+              "goodby": 1
+            },
+            "intents": {
+              "intent.joke": 1,
+              "intent.mission": 1,
+              "intent.weather": 1,
+              "intent.science": 1,
+              "greetings.hello": 1,
+              "greetings.hi": 1,
+              "greetings.howAreYou": 1,
+              "farewell.bye": 1,
+              "farewell.goodbye": 1
+            },
+            "intentFeatures": {
+              "intent.joke": {
+                "tell": 1,
+                "me": 1,
+                "a": 1,
+                "joke": 1
+              },
+              "intent.mission": {
+                "what": 1,
+                "is": 1,
+                "quantumbot": 1,
+                "core": 1,
+                "mission": 1
+              },
+              "intent.weather": {
+                "what": 1,
+                "is": 1,
+                "the": 1,
+                "weather": 1,
+                "today": 1
+              },
+              "intent.science": {
+                "how": 1,
+                "doe": 1,
+                "photosynthesi": 1,
+                "work": 1
+              },
+              "greetings.hello": {
+                "hello": 1
+              },
+              "greetings.hi": {
+                "hey": 1,
+                "hi": 1
+              },
+              "greetings.howAreYou": {
+                "how": 1,
+                "are": 1,
+                "you": 1
+              },
+              "farewell.bye": {
+                "bye": 1
+              },
+              "farewell.goodbye": {
+                "goodby": 1
+              }
+            },
+            "featuresToIntent": {
+              "tell": [
+                "intent.joke"
+              ],
+              "me": [
+                "intent.joke"
+              ],
+              "a": [
+                "intent.joke"
+              ],
+              "joke": [
+                "intent.joke"
+              ],
+              "what": [
+                "intent.mission",
+                "intent.weather"
+              ],
+              "is": [
+                "intent.mission",
+                "intent.weather"
+              ],
+              "quantumbot": [
+                "intent.mission"
+              ],
+              "core": [
+                "intent.mission"
+              ],
+              "mission": [
+                "intent.mission"
+              ],
+              "the": [
+                "intent.weather"
+              ],
+              "weather": [
+                "intent.weather"
+              ],
+              "today": [
+                "intent.weather"
+              ],
+              "how": [
+                "intent.science",
+                "greetings.howAreYou"
+              ],
+              "doe": [
+                "intent.science"
+              ],
+              "photosynthesi": [
+                "intent.science"
+              ],
+              "work": [
+                "intent.science"
+              ],
+              "hello": [
+                "greetings.hello"
+              ],
+              "hey": [
+                "greetings.hi"
+              ],
+              "hi": [
+                "greetings.hi"
+              ],
+              "are": [
+                "greetings.howAreYou"
+              ],
+              "you": [
+                "greetings.howAreYou"
+              ],
+              "bye": [
+                "farewell.bye"
+              ],
+              "goodby": [
+                "farewell.goodbye"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "tell",
+                "me",
+                "a",
+                "joke",
+                "what",
+                "is",
+                "quantumbot",
+                "core",
+                "mission",
+                "the",
+                "weather",
+                "today",
+                "how",
+                "doe",
+                "photosynthesi",
+                "work",
+                "hello",
+                "hey",
+                "hi",
+                "are",
+                "you",
+                "bye",
+                "goodby"
+              ],
+              "intents": [
+                "intent.joke",
+                "intent.mission",
+                "intent.weather",
+                "intent.science",
+                "greetings.hello",
+                "greetings.hi",
+                "greetings.howAreYou",
+                "farewell.bye",
+                "farewell.goodbye"
+              ],
+              "perceptrons": [
+                [
+                  3.4732487201690674,
+                  3.4732487201690674,
+                  3.4732487201690674,
+                  3.4732487201690674,
+                  -0.2791613042354584,
+                  -0.2791613042354584,
+                  -0.13431134819984436,
+                  -0.13431134819984436,
+                  -0.13431134819984436,
+                  -0.1149015873670578,
+                  -0.1149015873670578,
+                  -0.1149015873670578,
+                  -0.3630680441856384,
+                  -0.1724243015050888,
+                  -0.1724243015050888,
+                  -0.1724243015050888,
+                  -0.41224250197410583,
+                  -0.4058213233947754,
+                  -0.39864519238471985,
+                  -0.1649661660194397,
+                  -0.1649661660194397,
+                  -0.3931726813316345,
+                  -0.39202967286109924,
+                  0.392622394480588
+                ],
+                [
+                  -0.08948321640491486,
+                  -0.08948321640491486,
+                  -0.08948321640491486,
+                  -0.08948321640491486,
+                  1.9382097721099854,
+                  1.9382097721099854,
+                  3.3947596549987793,
+                  3.3947596549987793,
+                  3.3947596549987793,
+                  -1.4157435894012451,
+                  -1.4157435894012451,
+                  -1.4157435894012451,
+                  -0.21605129539966583,
+                  -0.104990154504776,
+                  -0.104990154504776,
+                  -0.104990154504776,
+                  -0.23677387833595276,
+                  -0.23255082964897156,
+                  -0.2285204529762268,
+                  -0.08929380774497986,
+                  -0.08929380774497986,
+                  -0.22533006966114044,
+                  -0.22467492520809174,
+                  0.22497987376235135
+                ],
+                [
+                  -0.10458789020776749,
+                  -0.10458789020776749,
+                  -0.10458789020776749,
+                  -0.10458789020776749,
+                  1.9501025676727295,
+                  1.9501025676727295,
+                  -1.3976079225540161,
+                  -1.3976079225540161,
+                  -1.3976079225540161,
+                  3.3934881687164307,
+                  3.3934881687164307,
+                  3.3934881687164307,
+                  -0.2525334656238556,
+                  -0.12274075299501419,
+                  -0.12274075299501419,
+                  -0.12274075299501419,
+                  -0.23728252947330475,
+                  -0.22991077601909637,
+                  -0.22275210916996002,
+                  -0.1043516993522644,
+                  -0.1043516993522644,
+                  -0.2166106253862381,
+                  -0.21432098746299744,
+                  0.20504081052313586
+                ],
+                [
+                  -0.1282530426979065,
+                  -0.1282530426979065,
+                  -0.1282530426979065,
+                  -0.1282530426979065,
+                  -0.1769585907459259,
+                  -0.1769585907459259,
+                  -0.08573289960622787,
+                  -0.08573289960622787,
+                  -0.08573289960622787,
+                  -0.07335668057203293,
+                  -0.07335668057203293,
+                  -0.07335668057203293,
+                  2.4649136066436768,
+                  3.8467700481414795,
+                  3.8467700481414795,
+                  3.8467700481414795,
+                  -0.3360765874385834,
+                  -0.32598984241485596,
+                  -0.3219648599624634,
+                  -1.3769395351409912,
+                  -1.3769395351409912,
+                  -0.28270286321640015,
+                  -0.28042587637901306,
+                  0.280485325495573
+                ],
+                [
+                  -0.44438987970352173,
+                  -0.44438987970352173,
+                  -0.44438987970352173,
+                  -0.44438987970352173,
+                  -0.5082086324691772,
+                  -0.5082086324691772,
+                  -0.2541056275367737,
+                  -0.2541056275367737,
+                  -0.2541056275367737,
+                  -0.2539566159248352,
+                  -0.2539566159248352,
+                  -0.2539566159248352,
+                  -0.8123186826705933,
+                  -0.3216578960418701,
+                  -0.3216578960418701,
+                  -0.3216578960418701,
+                  12.160028457641602,
+                  -1.72725248336792,
+                  -1.7158818244934082,
+                  -0.49040570855140686,
+                  -0.49040570855140686,
+                  -1.702837586402893,
+                  -1.690733551979065,
+                  1.780133341579233
+                ],
+                [
+                  -0.8924521803855896,
+                  -0.8924521803855896,
+                  -0.8924521803855896,
+                  -0.8924521803855896,
+                  -1.0200982093811035,
+                  -1.0200982093811035,
+                  -0.5100516676902771,
+                  -0.5100516676902771,
+                  -0.5100516676902771,
+                  -0.5099769830703735,
+                  -0.5099769830703735,
+                  -0.5099769830703735,
+                  -1.6397382020950317,
+                  -0.6433131098747253,
+                  -0.6433131098747253,
+                  -0.6433131098747253,
+                  -3.375478744506836,
+                  10.474205017089844,
+                  10.463883399963379,
+                  -0.9949179887771606,
+                  -0.9949179887771606,
+                  -3.4459116458892822,
+                  -3.4233624935150146,
+                  3.5709525450444177
+                ],
+                [
+                  -0.19734439253807068,
+                  -0.19734439253807068,
+                  -0.19734439253807068,
+                  -0.19734439253807068,
+                  -0.24791066348552704,
+                  -0.24791066348552704,
+                  -0.1191270723938942,
+                  -0.1191270723938942,
+                  -0.1191270723938942,
+                  -0.10193739831447601,
+                  -0.10193739831447601,
+                  -0.10193739831447601,
+                  3.6862387657165527,
+                  -1.3828480243682861,
+                  -1.3828480243682861,
+                  -1.3828480243682861,
+                  -0.452154278755188,
+                  -0.4503372311592102,
+                  -0.4487152695655823,
+                  5.074201583862305,
+                  5.074201583862305,
+                  -0.48044630885124207,
+                  -0.4731737971305847,
+                  0.45071963782592683
+                ],
+                [
+                  -0.4495561420917511,
+                  -0.4495561420917511,
+                  -0.4495561420917511,
+                  -0.4495561420917511,
+                  -0.5138567686080933,
+                  -0.5138567686080933,
+                  -0.25691166520118713,
+                  -0.25691166520118713,
+                  -0.25691166520118713,
+                  -0.2567710280418396,
+                  -0.2567710280418396,
+                  -0.2567710280418396,
+                  -0.8226209878921509,
+                  -0.3437114655971527,
+                  -0.3437114655971527,
+                  -0.3437114655971527,
+                  -1.7030960321426392,
+                  -1.6903517246246338,
+                  -1.6773189306259155,
+                  -0.47553151845932007,
+                  -0.47553151845932007,
+                  12.161728858947754,
+                  -1.725590467453003,
+                  1.7891172710804026
+                ],
+                [
+                  -0.45479393005371094,
+                  -0.45479393005371094,
+                  -0.45479393005371094,
+                  -0.45479393005371094,
+                  -0.5199164748191833,
+                  -0.5199164748191833,
+                  -0.2600651979446411,
+                  -0.2600651979446411,
+                  -0.2600651979446411,
+                  -0.25918444991111755,
+                  -0.25918444991111755,
+                  -0.25918444991111755,
+                  -0.8292643427848816,
+                  -0.34953489899635315,
+                  -0.34953489899635315,
+                  -0.34953489899635315,
+                  -1.713603138923645,
+                  -1.7011995315551758,
+                  -1.6884922981262207,
+                  -0.47414153814315796,
+                  -0.47414153814315796,
+                  -1.6737289428710938,
+                  12.16346549987793,
+                  1.78974594733644
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "tell me a joke"
+      ],
+      [
+        "en",
+        "What is Quantumbot Core Mission"
+      ],
+      [
+        "en",
+        "what is the weather today"
+      ],
+      [
+        "en",
+        "how does photosynthesis work"
+      ],
+      [
+        "en",
+        "hello"
+      ],
+      [
+        "en",
+        "hey"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "how are you"
+      ],
+      [
+        "en",
+        "bye"
+      ],
+      [
+        "en",
+        "goodbye"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "intent.mission": [
+          {
+            "answer": "The QuantumBot Core mission is all about building a backend server for a chat application. You'll learn how to handle chat appending, starting, and removing chat history related to a user or session ID. You'll also create endpoints to log chat histories and include necessary debugging information. The mission covers tasks like project setup, defining API endpoints, testing with Postman, and creating a presentation and documentation. Let me know if you need help with any specific task or concept!"
+          }
+        ],
+        "intent.joke": [
+          {
+            "answer": "Why did the scarecrow win an award? Because he was outstanding!"
+          }
+        ],
+        "intent.weather": [
+          {
+            "answer": "I'm sorry, I don't have real-time weather information."
+          }
+        ],
+        "intent.science": [
+          {
+            "answer": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll."
+          }
+        ],
+        "greetings.hello": [
+          {
+            "answer": "Hello!"
+          }
+        ],
+        "greetings.hi": [
+          {
+            "answer": "Hi there!"
+          }
+        ],
+        "greetings.howAreYou": [
+          {
+            "answer": "I'm doing well, thank you!"
+          }
+        ],
+        "farewell.bye": [
+          {
+            "answer": "Goodbye!"
+          }
+        ],
+        "farewell.goodbye": [
+          {
+            "answer": "See you later!"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
