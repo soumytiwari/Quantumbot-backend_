@@ -1,12 +1,12 @@
 // index.js
 
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const session = require('express-session');
-const { NlpManager } = require('node-nlp');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const mongoose = require('mongoose');
 const connectMongo = require('connect-mongo');
-//const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -22,6 +22,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatbot', {
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
+
+
 
 const MongoStore = connectMongo.create({
   mongoUrl: 'mongodb://127.0.0.1:27017/chatbot',
@@ -56,74 +58,94 @@ app.use(session({
 }));
 
 
+// Set up Google Generative AI
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+
+
+// Define Message model only if not defined
+if (!mongoose.models.Message) {
+  const Message = mongoose.model('Message', { text: String });
+}
+
+
 // Create an instance of the NLP Manager
-const manager = new NlpManager({ languages: ['en'] });
+// const manager = new NlpManager({ languages: ['en'] });
+//
+// // Train the NLP model with custom data
+// manager.addDocument('en', 'tell me a joke', 'intent.joke');
+// manager.addDocument('en', 'What is Quantumbot Core Mission', 'intent.mission');
+// manager.addDocument('en', 'what is the weather today', 'intent.weather');
+// manager.addDocument('en', 'how does photosynthesis work', 'intent.science');
+// // Add more training data based on your intents
+//
+// manager.addAnswer('en', 'intent.mission', "The QuantumBot Core mission is all about building a backend server for a chat application. You'll learn how to handle chat appending, starting, and removing chat history related to a user or session ID. You'll also create endpoints to log chat histories and include necessary debugging information. The mission covers tasks like project setup, defining API endpoints, testing with Postman, and creating a presentation and documentation. Let me know if you need help with any specific task or concept!");
+// manager.addAnswer('en', 'intent.joke', "Why did the scarecrow win an award? Because he was outstanding!");
+// manager.addAnswer('en', 'intent.weather', "I'm sorry, I don't have real-time weather information.");
+// manager.addAnswer('en', 'intent.science', "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll.");
+//
+//
+// // Train the NLP model with sample data
+// manager.addDocument('en', 'hello', 'greetings.hello');
+// manager.addDocument('en', 'hey', 'greetings.hi');
+// manager.addDocument('en', 'hi', 'greetings.hi');
+// manager.addDocument('en', 'how are you', 'greetings.howAreYou');
+// manager.addDocument('en', 'bye', 'farewell.bye');
+// manager.addDocument('en', 'goodbye', 'farewell.goodbye');
+// manager.addAnswer('en', 'greetings.hello', 'Hello!');
+// manager.addAnswer('en', 'greetings.hi', 'Hi there!');
+// manager.addAnswer('en', 'greetings.howAreYou', 'I\'m doing well, thank you!');
+// manager.addAnswer('en', 'farewell.bye', 'Goodbye!');
+// manager.addAnswer('en', 'farewell.goodbye', 'See you later!');
+//
+// // Train and save the model
+// (async () => {
+//     await manager.train();
+//     manager.save();
+// })();
 
-// Train the NLP model with custom data
-manager.addDocument('en', 'tell me a joke', 'intent.joke');
-manager.addDocument('en', 'What is Quantumbot Core Mission', 'intent.mission');
-manager.addDocument('en', 'what is the weather today', 'intent.weather');
-manager.addDocument('en', 'how does photosynthesis work', 'intent.science');
-// Add more training data based on your intents
-
-manager.addAnswer('en', 'intent.mission', "The QuantumBot Core mission is all about building a backend server for a chat application. You'll learn how to handle chat appending, starting, and removing chat history related to a user or session ID. You'll also create endpoints to log chat histories and include necessary debugging information. The mission covers tasks like project setup, defining API endpoints, testing with Postman, and creating a presentation and documentation. Let me know if you need help with any specific task or concept!");
-manager.addAnswer('en', 'intent.joke', "Why did the scarecrow win an award? Because he was outstanding!");
-manager.addAnswer('en', 'intent.weather', "I'm sorry, I don't have real-time weather information.");
-manager.addAnswer('en', 'intent.science', "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll.");
-
-
-// Train the NLP model with sample data
-manager.addDocument('en', 'hello', 'greetings.hello');
-manager.addDocument('en', 'hey', 'greetings.hi');
-manager.addDocument('en', 'hi', 'greetings.hi');
-manager.addDocument('en', 'how are you', 'greetings.howAreYou');
-manager.addDocument('en', 'bye', 'farewell.bye');
-manager.addDocument('en', 'goodbye', 'farewell.goodbye');
-manager.addAnswer('en', 'greetings.hello', 'Hello!');
-manager.addAnswer('en', 'greetings.hi', 'Hi there!');
-manager.addAnswer('en', 'greetings.howAreYou', 'I\'m doing well, thank you!');
-manager.addAnswer('en', 'farewell.bye', 'Goodbye!');
-manager.addAnswer('en', 'farewell.goodbye', 'See you later!');
-
-// Train and save the model
-(async () => {
-    await manager.train();
-    manager.save();
-})();
-
-// Define a route for POST requests to '/api/messages'
+// Handle incoming chat messages
 app.post('/api/messages', async (req, res) => {
   const userMessage = req.body.message;
   const sessionID = req.sessionID;
 
-  // Log user message
+  // Save the user message to MongoDB
+  //const userMessageModel = new mongoose.models.Message({ text: userMessage });
+  //await userMessageModel.save();
+
+  // Save the user message to MongoDB
   const userLog = new Message({
     text: userMessage,
     sender: 'User',
     timestamp: new Date(),
     sessionID: sessionID,
   });
-  userLog.save();
+  await userLog.save();
 
 
-  // Process the message using the NLP model
-  const response = await manager.process('en', userMessage);
+  // Generate a response using Google's Gemini API
+  const geminiModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  const geminiResult = await geminiModel.generateContent(userMessage);
+  const geminiResponse = await geminiResult.response;
+  const botResponse = geminiResponse.text();
 
-  // Log bot response and intent
+  // Save the bot's response to MongoDB
+  //const botMessageModel = new mongoose.models.Message({ text: botResponse });
+  //await botMessageModel.save();
+
+  // Save the bot's response and intent to MongoDB
   const botLog = new Message({
-    text: response.answer,
+    botResponse: botResponse,
     sender: 'Bot',
     timestamp: new Date(),
     sessionID: sessionID,
-    intent: response.intent,
-    botResponse: response.answer,
+    intent: geminiResponse.intent, // Assuming Gemini API provides intent in the response
   });
-  botLog.save();
+  await botLog.save();
 
-  // Send the bot response to the user
-  res.json({ response: response.answer });
+  // Send a response
+  res.json({ response: botResponse });
 });
-
 
 // Start the server
 app.listen(3000, () => {
