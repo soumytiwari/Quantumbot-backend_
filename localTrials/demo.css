@@ -2,6 +2,7 @@
     box-sizing: border-box;
     text-decoration: none;
     outline: none;
+    overflow: hidden;
 }
 
 body {
@@ -195,7 +196,7 @@ h2 {
 #input-container {
     position: relative;
     width: 70%;
-    max-width: 800px;
+    max-width: 810px;
     display: flex;
     /* align-items: center; */
     /* justify-content: center; */
@@ -203,6 +204,7 @@ h2 {
     margin-bottom: 20px;
     overflow-y: hidden;
 }
+
 
 #user-input {
     flex: 1;
@@ -231,9 +233,12 @@ h2 {
     border: none;
     cursor: pointer;
     width: 40px;
+    padding-right: 50px;
 }
 
 /* .border{
     border: 2px solid blue;
 } */
 @media screen and (max-width: 760px) {}
+
+
