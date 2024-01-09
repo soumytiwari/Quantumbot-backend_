@@ -1,12 +1,14 @@
 * {
     box-sizing: border-box;
-  }
+}
+
 .left {
     border: 2px solid red;
     /* display: inline-block; */
     padding: 2px;
     float: left;
 }
+
 .mid {
     border: 2px solid purple;
     /* display: inline-block; */
@@ -14,6 +16,7 @@
     float: left;
     margin-left: 45%;
 }
+
 .ryt {
     border: 2px solid steelblue;
     /* display: inline-block; */
@@ -36,6 +39,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+
 }
 
 .input-container {
@@ -45,7 +49,7 @@ body {
 
 .input-container textarea {
     background-color: #f9f9f96c;
-    outline:rgba(0, 0, 0, 0.1);
+    outline: rgba(0, 0, 0, 0.1);
 }
 
 textarea {
@@ -74,8 +78,10 @@ button {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f96c;
-    max-height: 300px; /* Set a maximum height for the response container */
-    overflow-y: auto; /* Enable vertical scrollbar if the content overflows */
+    max-height: 300px;
+    /* Set a maximum height for the response container */
+    overflow-y: auto;
+    /* Enable vertical scrollbar if the content overflows */
 }
 
 .chat-history {
@@ -118,3 +124,10 @@ button {
     background-color: #f9f9f96c;
     clear: both;
 }
+
+.btnSess {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+
