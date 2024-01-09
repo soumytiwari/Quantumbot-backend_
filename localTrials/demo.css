@@ -198,8 +198,8 @@ h2 {
     width: 70%;
     max-width: 810px;
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     margin-bottom: 20px;
     overflow-y: hidden;
