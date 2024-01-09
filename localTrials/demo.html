@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatGPT UI</title>
     <style>
+        * {
+            box-sizing: border-box;
+            text-decoration: none;
+            outline: none;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -16,8 +22,10 @@
             color: #ccc;
         }
 
-        /* =============================================== */
+        /* =======================  SIDEBAR  ======================== */
         .sidenav {
+            display: flex;
+            flex-direction: column;
             height: 100%;
             width: 0;
             position: fixed;
@@ -28,63 +36,76 @@
             transition: 0.5s;
             overflow: hidden;
         }
-        .new-session-btn{
+
+        .new-session-btn {
             text-decoration: None;
-            color :white ;
+            color: white;
             padding: 10px;
             margin: 10px;
             margin-top: 20px;
             background-color: transparent;
             display: flex;
-            border-radius: 5px;
             overflow: hidden;
         }
-        .img-width-20{
+
+        .img-width-20 {
             width: 20px;
         }
 
         .hover:hover {
-            background-color: #4e4d4d;
+            background-color: #292929;
+            border-radius: 10px;
             cursor: pointer;
         }
-        .space{
+
+        .space {
             margin-left: 20px;
             width: 100%;
             display: flex;
             justify-content: space-between;
         }
-        .chat-topics{
-            margin: 10px;
-            margin-top: 50px;
-            overflow: hidden;
+
+        .chat-topics {
+            flex: 1;
+            margin: 5px;
+            margin-top: 10px;
+            overflow-y: scroll;
+            padding: 5px;
         }
 
-        #day{
+        #day {
             opacity: 0.6;
             font-size: small;
             margin-left: 10px;
         }
-        
-        .sessions{
+
+        .sessions {
             display: flex;
             margin: 10px 0px;
             padding: 10px;
             justify-content: space-between;
-            border-radius: 5px;
             margin-bottom: 0px;
-            overflow: hidden;
-            /* background-color: transparent; */
+            overflow: scroll;
+            border-radius: 10px;
+
         }
 
-        /* ================================================= */
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
+        .account-info {
+            margin: 5px;
+            padding: 5px;
+            flex: 0.25;
+            height: 10px;
         }
+
+        .user-acc {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+
+        }
+
+
+        /* =====================  SIDEBAR END  ============================ */
 
         .top-nav {
             display: flex;
@@ -112,23 +133,26 @@
             display: flex;
             flex-direction: column;
         }
-        .side-btn{
-           position: relative;
-           width: min-content;
-           top: 45%;
-           left: 0;
-           opacity: 0.4;
+
+        .side-btn {
+            position: relative;
+            width: min-content;
+            top: 45%;
+            left: 0;
+            opacity: 0.4;
         }
 
-        .side-btn:hover{
+        .side-btn:hover {
             opacity: 1;
         }
-        .content-area{
+
+        .content-area {
             flex: 1;
-            overflow-y: scroll;
+            overflow-y: hidden;
             display: flex;
             justify-content: center;
         }
+
         #chat-container {
             overflow: scroll;
             display: none;
@@ -138,26 +162,30 @@
         }
 
 
-        .user-info{
+        .user-info {
             display: flex;
             font-weight: 900;
         }
-        .avatar{
+
+        .avatar {
             width: 30px;
             margin-right: 30px;
         }
-        .message{
+
+        .message {
             margin: 4px 64px;
             overflow-wrap: normal;
         }
-        .box{
+
+        .box {
             margin: 10px 0px;
         }
-        .chat{
+
+        .chat {
             margin-bottom: 10px;
         }
 
-        .new-chat{
+        .new-chat {
             display: flex;
             flex-direction: column;
             height: max-content;
@@ -165,12 +193,13 @@
             align-items: center;
             text-align: center;
         }
-        
-        .new-chat img{
+
+        .new-chat img {
             margin: 20px;
             width: 80px;
             color: #ccc;
         }
+
         #input-container {
             position: relative;
             width: 70%;
@@ -181,10 +210,10 @@
             margin: 0px auto;
             margin-bottom: 20px;
         }
-        
+
         #user-input {
-            resize: none;
             flex: 1;
+            resize: none;
             padding: 10px;
             padding-right: 60px;
             border: 2px solid #ccc;
@@ -194,7 +223,8 @@
             color: #ccc;
             font-family: Arial, sans-serif;
         }
-        #user-input{
+
+        #user-input {
             min-height: 40px;
             max-height: 150px;
         }
@@ -212,72 +242,74 @@
         /* .border{
             border: 2px solid blue;
         } */
-        @media screen and (max-width: 760px){
-            
-        }
+        @media screen and (max-width: 760px) {}
     </style>
 </head>
 
 <body>
 
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class = "new-session-btn hover" onclick="newSession()">
-            <img class = 'img-width-20' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABaklEQVRIS+2W0W3CMBCGzxYPPGJVEPHWbtANygZtNygb0AlKNmCDskHpBF2hI/CGAqrsZ4SSnlGNnMg5UjsOL+TFSuK7z777zz4GF3rYhbhwFiylHMB+P8kB7n0XyRlbi9FoaduT4CP0cPhCA2+oBVNiOBTmnQZvty/A2LvvTh12rwhf6O9nQx0ClVn2BJzrhQ+0nzzP05skmUcHa4Dc7SY46HTVg2MJCeFFLTimkGhwRCGR4J8sm3PO30LEZNvaQrqCS+V0DXWoyFzigqKYmsvidGR2EGoFvd6dEEJ1meMZQpcG2hnYlbZOQk2C/66wj1BRnewtIdHglrsNW0gk2PzEc3WGpXC8uPHsfsBB36fV5xvnfLocoo1Wb0lIjcD2pJoSW6Dj1FaoT3rI1qcC1vWXmp7JB2bbNAUr7FumIklWoUBj3wT8iC3usxiP121BSweIy6ncbG6h31eh+fy3uNrcYdVX1L6aWvgvmSwXLkbWqz8AAAAASUVORK5CYII="/>
-            <div class = "space">
+        <a href="javascript:void(0)" class="new-session-btn hover border" onclick="newSession()">
+            <img class='img-width-20'
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABaklEQVRIS+2W0W3CMBCGzxYPPGJVEPHWbtANygZtNygb0AlKNmCDskHpBF2hI/CGAqrsZ4SSnlGNnMg5UjsOL+TFSuK7z777zz4GF3rYhbhwFiylHMB+P8kB7n0XyRlbi9FoaduT4CP0cPhCA2+oBVNiOBTmnQZvty/A2LvvTh12rwhf6O9nQx0ClVn2BJzrhQ+0nzzP05skmUcHa4Dc7SY46HTVg2MJCeFFLTimkGhwRCGR4J8sm3PO30LEZNvaQrqCS+V0DXWoyFzigqKYmsvidGR2EGoFvd6dEEJ1meMZQpcG2hnYlbZOQk2C/66wj1BRnewtIdHglrsNW0gk2PzEc3WGpXC8uPHsfsBB36fV5xvnfLocoo1Wb0lIjcD2pJoSW6Dj1FaoT3rI1qcC1vWXmp7JB2bbNAUr7FumIklWoUBj3wT8iC3usxiP121BSweIy6ncbG6h31eh+fy3uNrcYdVX1L6aWvgvmSwXLkbWqz8AAAAASUVORK5CYII=" />
+            <div class="space">
                 <span>New Chat</span>
-                <img class = 'img-width-20' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg=="/>
+                <img class='img-width-20'
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg==" />
             </div>
         </a>
-        <div class="chat-topics" id = "topics">
-            <!-- <a class="sessions hover"  onclick="">
-                <span class = "session-title">New Chat</span>
-                <img class = 'img-width-20' src="https://img.icons8.com/ios-filled/FFFFFF/menu-2.png" alt="menu-2"/>
-            </a>
-            <a class="sessions hover" onclick="">
-                <span class = "session-title">New Chat</span>
-                <img class = 'img-width-20' src="https://img.icons8.com/ios-filled/FFFFFF/menu-2.png" alt="menu-2"/>
-            </a> -->
+        <div class="chat-topics border" id="topics">
+
         </div>
-        <div class="account-info"></div>
+        <div class="account-info border">
+            <div class="user-acc hover">
+                <img class="avatar" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/user--v1.png" alt="user" />
+                <span id="user-name">User Name</span>
+            </div>
+        </div>
     </div>
 
     <div id="main">
         <div class="top-nav border">
-            <img class = "icon-btn" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg=="/>
+            <img class="icon-btn"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg==" />
             <h2>Chat Gpt</h2>
         </div>
         <div class="side-btn">
-            <span class="menu-btn" id = "menu-btn" onclick="openNav()">
-                <img id = "menu-arrow" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAzUlEQVRIS+3VsQ3CMBAF0LOUAeImNaPACGzCJozACKzCBpQpUjgDRAl3iBIk/38n0thSlMbRy32fzkl2WmknVxr8t+Rb1FVRl1L6nPNctfnHJjjqMk1HSekm63rOw/BgcQi2SmVZnor1+syybScWh2CrTiu+6uvyqZTGYTgKp+AInIa9uAv24BGwNZo1nK3qZnPB2uEUan9Iwx6Uhr0oBUegMFzG8SBdZyMTaqRv8xw+4/clIXL3zGm4YvYmCqk4CoejbjCbQIuaTQ7+7gVkBnQfqvJaVQAAAABJRU5ErkJggg=="/>
+            <span class="menu-btn" id="menu-btn" onclick="openNav()">
+                <img id="menu-arrow"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAzUlEQVRIS+3VsQ3CMBAF0LOUAeImNaPACGzCJozACKzCBpQpUjgDRAl3iBIk/38n0thSlMbRy32fzkl2WmknVxr8t+Rb1FVRl1L6nPNctfnHJjjqMk1HSekm63rOw/BgcQi2SmVZnor1+syybScWh2CrTiu+6uvyqZTGYTgKp+AInIa9uAv24BGwNZo1nK3qZnPB2uEUan9Iwx6Uhr0oBUegMFzG8SBdZyMTaqRv8xw+4/clIXL3zGm4YvYmCqk4CoejbjCbQIuaTQ7+7gVkBnQfqvJaVQAAAABJRU5ErkJggg==" />
             </span>
         </div>
-        <div class = "border content-area">
-            <div class="new-chat border" id = 'logo'>
-                <img src = "https://freepnglogo.com/images/all_img/1700403115chatgpt-logo-transparent.png" alt = "logo">
+        <div class="border content-area">
+            <div class="new-chat border" id='logo'>
+                <img src="https://freepnglogo.com/images/all_img/1700403115chatgpt-logo-transparent.png" alt="logo">
                 <h2>How can I help you today?</h2>
             </div>
-            <div class = 'border' id="chat-container">
+            <div class='border' id="chat-container">
             </div>
         </div>
 
-        <div class = 'border' id="input-container">
-            <textarea class="border" type="text" id="user-input" placeholder="Type your message..." autocomplete="off"> </textarea>
+        <div class='border' id="input-container">
+            <textarea class="border" type="text" id="user-input" placeholder="Type your message..."
+                autocomplete="off"> </textarea>
             <button id="send-button" onclick="sendMessage()">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAACmklEQVRYR+2YgVHCMBiF6Qa6AW4gG+AE6gS6gTKBMoEwgTiBOIFsIBuoE8gG+N5dwoWY/PnbJPXwzF2vHLTJ15eX1z80gwNszQEyD/6h+5q1v6X0drs9gnKnONZN02z6UlEzTlBpA/yGDoamkxnOc8B/aDqtfU0MeoyBXwODL/Hd5LfhJaW/BMUI/wR4nntv0YUIi7w79oiBrY1tFn2SS9CPALlWwvQKL0ETmOC2TcyHG2EGuFC5YLlwqzUJmpHn+noJmEuSwDq3OEnwvGyG6+2DFn0A8eXi+XoDiGN3dPzO2bhLeL94XKagfV+fhOIO8BdG+bEgaTH4FPQPX0t+BTyhr3DwvljLzvoUdNTXkkkBz9c/PZ+C75T1yYIpkNfqBaaEbx2XGuhYXqvhncR5EGZIDa+B9n3tj9sFPivrNdC+r2NilYaPZn0S2kytpg6xD9MWPpX1rOdHrlJaaJapUgb76nPTMGpTwmLR0u9804baGfpa2R+00FqlCTvHQbVVux2T7QRmTIYaFyihd/0loU1scRcjtVawzlZOgrV9LvwZ00BzymJR1QWWHuZbM6Zssk8N9DMGYG3htmTH7sVGWT48YYeRKWOfUxxUVrSWBtr1cxdYVoFUl9EZait8+aKBtTenag9OoevnXU0tGRzKUk1bexSD1UL7fp5i6u5jwCYJzhXKckfPVOjUUkr7ft7LSzuigaUNxoJfCZkFq1V6z8+BnQshU7FFz3KGOivrCyHtEYN+zs3YTn7wbpKgfT/PcO8njqyMrQ0dyufYmOqMrQ2tqTfo11YZWw1aUW/8CqyYHibCQv+aErZIbOUoLv1rSnvwbUa/FsvYHFhtTl8TuGTGVocuMUCNPpJVXo1Bc/v8h85VUHv/QSr9DVI+UD0WOldrAAAAAElFTkSuQmCC"/>
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAACmklEQVRYR+2YgVHCMBiF6Qa6AW4gG+AE6gS6gTKBMoEwgTiBOIFsIBuoE8gG+N5dwoWY/PnbJPXwzF2vHLTJ15eX1z80gwNszQEyD/6h+5q1v6X0drs9gnKnONZN02z6UlEzTlBpA/yGDoamkxnOc8B/aDqtfU0MeoyBXwODL/Hd5LfhJaW/BMUI/wR4nntv0YUIi7w79oiBrY1tFn2SS9CPALlWwvQKL0ETmOC2TcyHG2EGuFC5YLlwqzUJmpHn+noJmEuSwDq3OEnwvGyG6+2DFn0A8eXi+XoDiGN3dPzO2bhLeL94XKagfV+fhOIO8BdG+bEgaTH4FPQPX0t+BTyhr3DwvljLzvoUdNTXkkkBz9c/PZ+C75T1yYIpkNfqBaaEbx2XGuhYXqvhncR5EGZIDa+B9n3tj9sFPivrNdC+r2NilYaPZn0S2kytpg6xD9MWPpX1rOdHrlJaaJapUgb76nPTMGpTwmLR0u9804baGfpa2R+00FqlCTvHQbVVux2T7QRmTIYaFyihd/0loU1scRcjtVawzlZOgrV9LvwZ00BzymJR1QWWHuZbM6Zssk8N9DMGYG3htmTH7sVGWT48YYeRKWOfUxxUVrSWBtr1cxdYVoFUl9EZait8+aKBtTenag9OoevnXU0tGRzKUk1bexSD1UL7fp5i6u5jwCYJzhXKckfPVOjUUkr7ft7LSzuigaUNxoJfCZkFq1V6z8+BnQshU7FFz3KGOivrCyHtEYN+zs3YTn7wbpKgfT/PcO8njqyMrQ0dyufYmOqMrQ2tqTfo11YZWw1aUW/8CqyYHibCQv+aErZIbOUoLv1rSnvwbUa/FsvYHFhtTl8TuGTGVocuMUCNPpJVXo1Bc/v8h85VUHv/QSr9DVI+UD0WOldrAAAAAElFTkSuQmCC" />
             </button>
         </div>
     </div>
-    
+
     <script>
 
         class Session {
             constructor(id) {
                 this.id = id;
-                this.title = null ;
+                this.title = null;
                 this.messages = [];
             }
 
-            setTitle(title){
+            setTitle(title) {
                 this.title = title;
             }
 
@@ -292,41 +324,41 @@
         let last_session_id = null;
 
         const new_event = new Event('new_session');
-        var image =  document.getElementById("menu-arrow");
+        var image = document.getElementById("menu-arrow");
         var menu_btn = document.getElementById("menu-btn");
         const textarea = document.getElementById("user-input");
         textarea.addEventListener('input', autoResize, false);
-        
+
+        textarea.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send-button").click();
+            }
+        });
         function autoResize() {
             this.style.height = 'auto';
             this.style.height = this.scrollHeight + 'px';
         }
 
-        document.addEventListener('new_session', function(){
+        document.addEventListener('new_session', function () {
 
             // console.log('event was fire');
-            if(sessions.length != 0){
+            if (sessions.length != 0) {
                 const topic_container = document.getElementById('topics');
                 topic_container.replaceChildren();
                 sessions.forEach(session => {
-                    
-                    // console.log(session);
-                    // console.log(session.title);
-                    // console.log(session.messages);
-                    // console.log(session.id);
-
 
                     const topic_box = document.createElement('a');
                     topic_box.classList.add('sessions');
                     topic_box.classList.add('hover');
                     topic_box.id = session.id;
-                    topic_box.onclick = function() {openSession(session.id)};
+                    topic_box.onclick = function () { openSession(session.id) };
                     topic_box.innerHTML = `
                     <span class = "session-title">${session.title}</span>
                     <img class = 'img-width-20' src="https://img.icons8.com/ios-filled/FFFFFF/menu-2.png" alt="menu-2"/>
                     `;
 
-                    topic_container.appendChild(topic_box);
+                    topic_container.insertBefore(topic_box, topic_container.children[0]);
                 })
             }
         })
@@ -334,14 +366,14 @@
         function openNav() {
             document.getElementById("mySidenav").style.width = "280px";
             document.getElementById("main").style.marginLeft = "280px";
-            menu_btn.onclick = function () {closeNav()}
+            menu_btn.onclick = function () { closeNav() }
             image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAA3UlEQVRIS+3V0Q2CMBAG4CMwgI0B1nAFN9AR3EA30AkcQTeRjfCZQLFN5IEmmv+Ow8YEkr4d+Xo/vZJQpCeJ5NIC/yz5/426ruuVbZrjuizPnLgmdexRatubA3duVSbPtyguhgN08GBcBH9AyVp7QSNnwxqoj4cFa6EsWBOFYW0UgudAOfDDFW9GM9r3B1MUd3RuwzrocL27VsUh2O9WG4dhbZwFa+JsWAsXwV/weX8Sw2gEB66iLNsbY57IiIk7HuFdd6U0PaEodIEgu5fUTO5Ygi4dS1MTvRftG78AOCudH43NHUoAAAAASUVORK5CYII=";
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
-            menu_btn.onclick = function () {openNav()}
+            menu_btn.onclick = function () { openNav() }
             image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAzUlEQVRIS+3VsQ3CMBAF0LOUAeImNaPACGzCJozACKzCBpQpUjgDRAl3iBIk/38n0thSlMbRy32fzkl2WmknVxr8t+Rb1FVRl1L6nPNctfnHJjjqMk1HSekm63rOw/BgcQi2SmVZnor1+syybScWh2CrTiu+6uvyqZTGYTgKp+AInIa9uAv24BGwNZo1nK3qZnPB2uEUan9Iwx6Uhr0oBUegMFzG8SBdZyMTaqRv8xw+4/clIXL3zGm4YvYmCqk4CoejbjCbQIuaTQ7+7gVkBnQfqvJaVQAAAABJRU5ErkJggg==";
         }
 
@@ -352,41 +384,48 @@
             chatcontainer.style.display = 'none';
             last_session_id = active_session.id;
             active_session = null;
-            document.getElementById(last_session_id).style.backgroundColor = 'transparent';
+
+            const btn = document.getElementById(last_session_id);
+            btn.style.backgroundColor = 'transparent';
+
+            // btn.addEventListener('mouseover', () => {
+            //     btn.style.backgroundColor = '#292929';
+            // });
 
         }
+
 
         function sendMessage() {
 
             const userInput = document.getElementById('user-input');
             const message = userInput.value.trim();
 
-            if(message != '') {
+            if (message != '') {
                 let currentsession = active_session;
 
                 const botmessage = botResponse(message);
-                
-                if(currentsession == null) {
-                    let newSession = new Session(sessioncount+=1);
+
+                if (currentsession == null) {
+                    let newSession = new Session(sessioncount += 1);
                     sessions.push(newSession);
                     currentsession = newSession;
                     active_session = currentsession;
-                    if(!currentsession.title){
+                    if (!currentsession.title) {
                         currentsession.setTitle(getHeadline(message));
                     }
                     document.dispatchEvent(new_event);
-                    document.getElementById(active_session.id).style.backgroundColor = '#4e4d4d';
+                    document.getElementById(active_session.id).style.backgroundColor = '#292929';
                 }
                 let current_message = {
                     user: message,
                     bot: botmessage,
                     timestamp: new Date().toLocaleString()
                 }
-                
+
                 currentsession.addMessage(current_message);
 
                 displayMessage(message, botmessage);
-                
+
                 // console.log(currentsession);
                 const chatcontainer = document.getElementById('chat-container');
                 chatcontainer.scrollTop = chatcontainer.scrollHeight;
@@ -395,7 +434,7 @@
         }
 
         function botResponse(user_message) {
-            var response =  `Hello there!, I am an Artficial Integeligence created by me, yes yes me, dont worry i will not harm you, because i am dumb (spelling is wrong) and i give same response everytime (you also dumb i guess) <br> anyway, you wrote this: <strong>${user_message}</strong>`;
+            var response = `Hello there!, I am an Artficial Integeligence created by me, yes yes me, dont worry i will not harm you, because i am dumb (spelling is wrong) and i give same response everytime (you also dumb i guess) <br> anyway, you wrote this: <strong>${user_message}</strong>`;
             return response;
         }
 
@@ -407,7 +446,7 @@
             return result;
         }
 
-        function displayMessage(message, bot_message){
+        function displayMessage(message, bot_message) {
             const logo = document.getElementById('logo');
             if (message !== '') {
                 logo.style.display = 'none';
@@ -418,17 +457,17 @@
                 const messagebox = document.createElement('div');
                 messagebox.classList.add('chat');
                 messagebox.classList.add('border');
-                messagebox.innerHTML = 
-                `<div class="box border" id = 'user'>
+                messagebox.innerHTML =
+                    `<div class="box border" id = 'user'>
                     <div class = 'user-info'>
-                        <img class = "avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABz0lEQVRIS82W0W3CMBCGbSsDYBWIeIMJChM03QA2KBuUCVomKBuUDcoG7QYNE8AbAiM5zxA5PTtBohDjcxsJ7tXn++4u5/9CyZWMXolLvMFSyhrZ79sky9qE0hokHvNmM/YtwAssN5suwN4B0j0BxZDI0CcBNLiAfgJQV1luWdbDwlFg0940/QBadLGllC55vd7BtB0HFkIDdbVuU2rAw3DmcsSCnyHQmyuYPldKje/C8NXliwVrqIZjbMIbjZHLEQder/uEMf2N3ZZP99TliAPnwyVdweA8Ab8eb7WWLl8UWAeRuKpH0OaJC6rP0WADF8I2ZAkcj7FQb7CBg3qpLOszxu6LKZ4zSmdY4Th0w6tiTAuxPrcNNpK520UKlgO0+KGkqgSEY85gU4GCxP+e6kKjXzzEI8+J0ilo9vBS262thgmOzArUe/dvlkD1Q5tul4LlatUmQfANPPsKxCZjWZXlYCH0JoqwsS/6WVblGRje6VPxl1EJ1wQp0e9zsBB6GfSro5pIM1C1wXHMc/B2u/jHQNnyTQDMreBiqBYVV5uHS9PO8fv+VbF5QthfHP/sHqHqr8O1sm9czTSfJhYEMedcbzFjt63V/l1137haxT9ITKwfgUos9gAAAABJRU5ErkJggg=="/>
+                        <img class = "avatar" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/user--v1.png" alt="user"/>
                         <span class = "you">You</span>
                     </div>
                     <div class = 'message'>${message}</div>
                 </div>
                 <div class = 'box border' id  = 'bot'>
                     <div class = 'user-info'>
-                        <img class = 'avatar' src="https://img.icons8.com/ios-filled/50/000000/slack-new.png" alt="slack-new"/>
+                        <img class = 'avatar' src="https://img.icons8.com/ios-filled/color/slack-new.png" alt="slack-new"/>
                         <span class = "you">Bot</span>
                     </div>
                     <div class = 'message'>${bot_message}</span></div>
@@ -441,17 +480,17 @@
             // console.log('session trying to open');
 
 
-            if(active_session != null ) {
+            if (active_session != null) {
                 // document.getElementById(last_session_id).style.backgroundColor = 'transparent';
-                if(active_session.id == s_id) {return}
+                if (active_session.id == s_id) { return }
                 newSession();
             }
-            active_session = sessions[s_id-1];
+            active_session = sessions[s_id - 1];
             document.getElementById(s_id).style.backgroundColor = '#4e4d4d';
             console.log(active_session);
             console.log(active_session.messages);
             messages = active_session.messages;
-            messages.forEach(m =>{
+            messages.forEach(m => {
                 displayMessage(m.user, m.bot);
             });
             const chatcontainer = document.getElementById('chat-container');
@@ -460,4 +499,5 @@
     </script>
 
 </body>
+
 </html>
