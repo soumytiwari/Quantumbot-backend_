@@ -163,7 +163,8 @@ function displayMessage(message, bot_message) {
         </div>
         <div class = 'box border' id  = 'bot'>
             <div class = 'user-info'>
-                <img class = 'avatar' src="Frame_1321316226.png" alt="slack-new"/>
+                
+                <img class = 'avatar' src="https://img.icons8.com/ios-filled/color/slack-new.png" alt="slack-new"/> 
                 <span class = "you">Bot</span>
             </div>
             <div class = 'message'>${bot_message}</span></div>
@@ -174,6 +175,7 @@ function displayMessage(message, bot_message) {
 
 // slack
 // <img class = 'avatar' src="https://img.icons8.com/ios-filled/color/slack-new.png" alt="slack-new"/> 
+// <img class = 'avatar' src="Frame_1321316226.png" alt="slack-new"/>
 // at avatar 
 
 function openSession(s_id) {
