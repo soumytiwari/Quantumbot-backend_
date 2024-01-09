@@ -87,7 +87,8 @@ body {
     margin-bottom: 0px;
     overflow: scroll;
     border-radius: 10px;
-
+    padding-left: 20px;
+    padding-top: 26.4px;
 }
 
 .account-info {
@@ -228,6 +229,10 @@ h2 {
     max-height: 150px;
     /* cnter the cursor */
     line-height: 17px;
+    font-size: 15px;
+    /* text-align: center; */
+    padding-top: 24.5px;
+    padding-left: 30px;
 }
 
 
