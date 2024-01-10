@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReX UI</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="new-session-btn hover border" onclick="newSession()">
+            <img class='img-width-20'
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABaklEQVRIS+2W0W3CMBCGzxYPPGJVEPHWbtANygZtNygb0AlKNmCDskHpBF2hI/CGAqrsZ4SSnlGNnMg5UjsOL+TFSuK7z777zz4GF3rYhbhwFiylHMB+P8kB7n0XyRlbi9FoaduT4CP0cPhCA2+oBVNiOBTmnQZvty/A2LvvTh12rwhf6O9nQx0ClVn2BJzrhQ+0nzzP05skmUcHa4Dc7SY46HTVg2MJCeFFLTimkGhwRCGR4J8sm3PO30LEZNvaQrqCS+V0DXWoyFzigqKYmsvidGR2EGoFvd6dEEJ1meMZQpcG2hnYlbZOQk2C/66wj1BRnewtIdHglrsNW0gk2PzEc3WGpXC8uPHsfsBB36fV5xvnfLocoo1Wb0lIjcD2pJoSW6Dj1FaoT3rI1qcC1vWXmp7JB2bbNAUr7FumIklWoUBj3wT8iC3usxiP121BSweIy6ncbG6h31eh+fy3uNrcYdVX1L6aWvgvmSwXLkbWqz8AAAAASUVORK5CYII=" />
+            <div class="space">
+                <span>New Chat</span>
+                <img class='img-width-20'
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg==" />
+            </div>
+        </a>
+        <div class="chat-topics border" id="topics">
+
+        </div>
+        <div class="account-info border">
+            <div class="user-acc hover">
+                <img class="avatar" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/user--v1.png" alt="user" />
+                <span id="user-name">User Name</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="top-nav border">
+            <img class="icon-btn"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABpUlEQVRIS+2Xy3HCMBCGZY+5owMw3JwOKCGUkA5CB3EFSQehhHSQdAAdxB2QG8MjI98RKLu2BZJtCT/Hl+yMZ2Cw9tPuvystDunJnJ64pFMwOxwe6Wi0LgquEMwYG5LTySeOMyyVEc8LKaWR+i5C4fsnPCHA51k/OTAseIGXXuEpByVkCY4DA1T6WGfhGjiOlPNNEyhugB2PGyKEn4lSg+vgJD2rdAFGEdpSbdKPbbc+8bzvTAAoxZNcYwPPTY6LNpNqOoM1yzhqHR6Ry2VBJ5MvubYVsFJIqGmgwQeDFTmfAxWK8MbgDFQGdIWbpGoENkATlhALOh5/tA62QgnJaWrt49SZrGpjcTWF1tK4DpTt98/YmpD6a3tW0rg21HHe1R6uFHEt6O28xjbTpCsdMYBZ5iSS9WIsJFvNVAGLgtawVm9X4Lst0wX4LjQ+r/VLp57GtlvK9Ns/WL1myw8CQkSlZ7Bb7mfwEQ8PNIvGyeiD/dq+cf5Ap9Mf6Tg37P3udm+u6+Kw16blBkLzeMs5pqm5gUTq5WCMuDmpnIdO/0nYttAb+A9Ly0MuzjP0HwAAAABJRU5ErkJggg==" />
+            <h2>ReX AI</h2>
+        </div>
+        <div class="side-btn">
+            <span class="menu-btn" id="menu-btn" onclick="openNav()">
+                <img id="menu-arrow"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAzUlEQVRIS+3VsQ3CMBAF0LOUAeImNaPACGzCJozACKzCBpQpUjgDRAl3iBIk/38n0thSlMbRy32fzkl2WmknVxr8t+Rb1FVRl1L6nPNctfnHJjjqMk1HSekm63rOw/BgcQi2SmVZnor1+syybScWh2CrTiu+6uvyqZTGYTgKp+AInIa9uAv24BGwNZo1nK3qZnPB2uEUan9Iwx6Uhr0oBUegMFzG8SBdZyMTaqRv8xw+4/clIXL3zGm4YvYmCqk4CoejbjCbQIuaTQ7+7gVkBnQfqvJaVQAAAABJRU5ErkJggg==" />
+            </span>
+        </div>
+        <div class="border content-area">
+            <div class="new-chat border" id='logo'>
+                <!-- <img src="https://freepnglogo.com/images/all_img/1700403115chatgpt-logo-transparent.png" alt="logo"> -->
+                <img src="Frame_1321316226.png" alt="logo">
+                <h2>How can I help you today?</h2>
+            </div>
+            <div class='border' id="chat-container">
+            </div>
+        </div>
+
+        <div class='border' id="input-container">
+            <textarea class="border" id="user-input" placeholder="Type your message..."
+                autocomplete="off"> </textarea>
+            <button id="send-button" onclick="sendMessage()">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAACmklEQVRYR+2YgVHCMBiF6Qa6AW4gG+AE6gS6gTKBMoEwgTiBOIFsIBuoE8gG+N5dwoWY/PnbJPXwzF2vHLTJ15eX1z80gwNszQEyD/6h+5q1v6X0drs9gnKnONZN02z6UlEzTlBpA/yGDoamkxnOc8B/aDqtfU0MeoyBXwODL/Hd5LfhJaW/BMUI/wR4nntv0YUIi7w79oiBrY1tFn2SS9CPALlWwvQKL0ETmOC2TcyHG2EGuFC5YLlwqzUJmpHn+noJmEuSwDq3OEnwvGyG6+2DFn0A8eXi+XoDiGN3dPzO2bhLeL94XKagfV+fhOIO8BdG+bEgaTH4FPQPX0t+BTyhr3DwvljLzvoUdNTXkkkBz9c/PZ+C75T1yYIpkNfqBaaEbx2XGuhYXqvhncR5EGZIDa+B9n3tj9sFPivrNdC+r2NilYaPZn0S2kytpg6xD9MWPpX1rOdHrlJaaJapUgb76nPTMGpTwmLR0u9804baGfpa2R+00FqlCTvHQbVVux2T7QRmTIYaFyihd/0loU1scRcjtVawzlZOgrV9LvwZ00BzymJR1QWWHuZbM6Zssk8N9DMGYG3htmTH7sVGWT48YYeRKWOfUxxUVrSWBtr1cxdYVoFUl9EZait8+aKBtTenag9OoevnXU0tGRzKUk1bexSD1UL7fp5i6u5jwCYJzhXKckfPVOjUUkr7ft7LSzuigaUNxoJfCZkFq1V6z8+BnQshU7FFz3KGOivrCyHtEYN+zs3YTn7wbpKgfT/PcO8njqyMrQ0dyufYmOqMrQ2tqTfo11YZWw1aUW/8CqyYHibCQv+aErZIbOUoLv1rSnvwbUa/FsvYHFhtTl8TuGTGVocuMUCNPpJVXo1Bc/v8h85VUHv/QSr9DVI+UD0WOldrAAAAAElFTkSuQmCC" />
+            </button>
+        </div>
+    </div>
+
+    <script src="demo.js"></script>
+
+</body>
+
+</html>

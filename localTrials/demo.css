@@ -1,0 +1,256 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #343541;
+    color: #ccc;
+    overflow: overlay;
+}
+
+::-webkit-scrollbar {
+    /* MAKES scrollbar invisible */
+    width: 0;
+    background: transparent;
+}
+
+/* =======================  SIDEBAR  ======================== */
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.new-session-btn {
+    text-decoration: None;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    background-color: transparent;
+    display: flex;
+    overflow: hidden;
+}
+
+.img-width-20 {
+    width: 20px;
+}
+
+.hover:hover {
+    background-color: #292929;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.space {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-topics {
+    flex: 1;
+    margin: 5px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+#day {
+    opacity: 0.6;
+    font-size: small;
+    margin-left: 10px;
+}
+
+.sessions {
+    display: flex;
+    margin: 10px 0px;
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 0px;
+    overflow: scroll;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 26.4px;
+}
+
+.account-info {
+    margin: 5px;
+    padding: 5px;
+    flex: 0.25;
+    height: 10px;
+}
+
+.user-acc {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+
+/* =====================  SIDEBAR END  ============================ */
+
+.top-nav {
+    display: flex;
+    height: 50px;
+    justify-content: start;
+    align-items: center;
+}
+
+.icon-btn {
+    width: 25px;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 18px;
+}
+
+h2 {
+    margin: 0px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+#main {
+    transition: 0.5s;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-btn {
+    position: relative;
+    width: min-content;
+    top: 45%;
+    left: 0;
+    opacity: 0.4;
+}
+
+.side-btn:hover {
+    opacity: 1;
+}
+
+.content-area {
+    flex: 1;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#chat-container {
+    overflow: scroll;
+    display: none;
+    width: 70%;
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+
+.user-info {
+    display: flex;
+    font-weight: 900;
+}
+
+.avatar {
+    width: 30px;
+    margin-right: 30px;
+}
+
+.message {
+    margin: 4px 64px;
+    overflow-wrap: normal;
+}
+
+.box {
+    margin: 10px 0px;
+}
+
+.chat {
+    margin-bottom: 10px;
+}
+
+.new-chat {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+}
+
+.new-chat img {
+    margin: 20px;
+    width: 80px;
+    color: #ccc;
+}
+
+#input-container {
+    position: relative;
+    width: 70%;
+    max-width: 810px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow-y: hidden;
+}
+
+
+#user-input {
+    flex: 1;
+    resize: none;
+    padding: 10px;
+    padding-right: 60px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    background-color: transparent;
+    box-sizing: border-box;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    min-height: 40px;
+    max-height: 150px;
+    /* cnter the cursor */
+    line-height: 17px;
+    font-size: 15px;
+    /* text-align: center; */
+    padding-top: 24.5px;
+    padding-left: 30px;
+}
+
+
+#send-button {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    padding-right: 50px;
+}
+
+/* .border{
+    border: 2px solid blue;
+} */
+@media screen and (max-width: 760px) {}
+
+
