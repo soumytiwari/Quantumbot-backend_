@@ -1,9 +1,10 @@
 // index.js
 
+
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
 const mongoose = require('mongoose');
 const connectMongo = require('connect-mongo');
 const bodyParser = require('body-parser');
@@ -104,14 +105,20 @@ if (!mongoose.models.Message) {
 //     manager.save();
 // })();
 
-// Handle incoming chat messages
+app.post('/api/streaming', async (req, res) => {
+    const prompt = req.body.prompt;
+
+    console.log('Received prompt:', prompt); // Add this line for debugging
+
+    // Add your existing code for streaming here
+
+    // For now, send a dummy response for testing
+    res.json({ response: 'Dummy response for testing' });
+});
+
 app.post('/api/messages', async (req, res) => {
   const userMessage = req.body.message;
   const sessionID = req.sessionID;
-
-  // Save the user message to MongoDB
-  //const userMessageModel = new mongoose.models.Message({ text: userMessage });
-  //await userMessageModel.save();
 
   // Save the user message to MongoDB
   const userLog = new Message({
@@ -122,30 +129,45 @@ app.post('/api/messages', async (req, res) => {
   });
   await userLog.save();
 
+  // Generate a response using Google's Gemini API with streaming
+  try {
+    const geminiModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const result = await geminiModel.generateContentStream([userMessage]);
 
-  // Generate a response using Google's Gemini API
-  const geminiModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
-  const geminiResult = await geminiModel.generateContent(userMessage);
-  const geminiResponse = await geminiResult.response;
-  const botResponse = geminiResponse.text();
+    let text = '';
+    for await (const chunk of result.stream) {
+      const chunkText = chunk.text();
+      text += chunkText;
+    }
 
-  // Save the bot's response to MongoDB
-  //const botMessageModel = new mongoose.models.Message({ text: botResponse });
-  //await botMessageModel.save();
+    // Save the bot's response and intent to MongoDB
+    const botLog = new Message({
+      botResponse: text,
+      sender: 'Bot',
+      timestamp: new Date(),
+      sessionID: sessionID,
+      intent: 'streaming', // You might want to adjust this based on your needs
+    });
+    await botLog.save();
 
-  // Save the bot's response and intent to MongoDB
-  const botLog = new Message({
-    botResponse: botResponse,
-    sender: 'Bot',
-    timestamp: new Date(),
-    sessionID: sessionID,
-    intent: geminiResponse.intent, // Assuming Gemini API provides intent in the response
-  });
-  await botLog.save();
-
-  // Send a response
-  res.json({ response: botResponse });
+    // Send a response as an array of messages
+    res.json({ messages: [{ sender: 'Bot', text: text, timestamp: new Date() }] });
+  } catch (error) {
+    console.error('Error generating content:', error);
+    // Save the error message to MongoDB
+    const errorLog = new Message({
+      botResponse: 'Error generating content',
+      sender: 'Bot',
+      timestamp: new Date(),
+      sessionID: sessionID,
+      intent: 'error', // You might want to adjust this based on your needs
+    });
+    await errorLog.save();
+    // Send an error response
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 
 // Start the server
 app.listen(3000, () => {
