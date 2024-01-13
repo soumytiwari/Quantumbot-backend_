@@ -1,0 +1,82 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chat {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.user-input {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+}
+
+input {
+    flex-grow: 1;
+    padding: 15px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Adjust the space between messages and different colors */
+.chat div {
+    margin-bottom: 15px;
+}
+
+/* Style for 'You' messages */
+/* .chat div.you {
+    text-align: right;
+    background-color: #aed581; /* Light Green color */
+    color: #2e7d32; /* Dark Green color */
+    padding: 10px;
+    border-radius: 5px;
+} */
+
+/* Add styles for 'User' messages */
+.chat div.user {
+    text-align: left;
+    background-color: #aed581; /* Light Green color */
+    color: #2e7d32; /* Dark Green color */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+/* Add styles for 'Bot' messages */
+.chat div.bot {
+    text-align: left;
+    background-color: #90caf9; /* Light Blue color */
+    color: #1565c0; /* Dark Blue color */
+    padding: 10px;
+    border-radius: 5px;
+}
