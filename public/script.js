@@ -76,6 +76,12 @@ function appendBotResponse(response) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+function handleSpeechRecognitionResult(speechResult) {
+    document.getElementById('userMessage').value = speechResult;
+    sendMessage(); // send the message when speech recognition is complete
+}
+
+
 function startSpeechRecognition() {
     recognition = new webkitSpeechRecognition(); // use webkitSpeechRecognition for Chrome
     recognition.continuous = false;
