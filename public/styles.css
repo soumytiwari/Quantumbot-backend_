@@ -1,82 +1,319 @@
-/* styles.css */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* style.css */
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
 }
 
-.chat-container {
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #343541;
+    color: #ccc;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.sidenav {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.new-session-btn {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    background-color: transparent;
+    display: flex;
+    overflow: hidden;
+}
+
+.img-width-20 {
+    width: 20px;
+}
+
+.hover:hover {
+    background-color: #292929;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.space {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-topics {
+    flex: 1;
+    margin: 5px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+#day {
+    opacity: 0.6;
+    font-size: small;
+    margin-left: 10px;
+}
+
+.sessions {
+    display: flex;
+    margin: 10px 0px;
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 0px;
+    overflow: scroll;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 26.4px;
+}
+
+.account-info {
+    margin: 5px;
+    padding: 5px;
+    flex: 0.25;
+    height: 10px;
+}
+
+.user-acc {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.top-nav {
+    display: flex;
+    height: 50px;
+    justify-content: start;
+    align-items: center;
+}
+
+.icon-btn {
+    width: 25px;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 18px;
+}
+
+h2 {
+    margin: 0px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+#main {
+    transition: 0.5s;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-btn {
+    position: relative;
+    width: min-content;
+    top: 45%;
+    left: 0;
+    opacity: 0.4;
+}
+
+.side-btn:hover {
+    opacity: 1;
+}
+
+.content-area {
+    flex: 1;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#chat-container {
+    overflow: scroll;
+    display: none;
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+}
+
+.user-info {
+    display: flex;
+    font-weight: 900;
+}
+
+.avatar {
+    width: 30px;
+    margin-right: 30px;
+}
+
+.message {
+    margin: 4px 64px;
+    overflow-wrap: normal;
+}
+
+.box {
+    margin: 10px 0px;
 }
 
 .chat {
-    flex-grow: 1;
-    overflow-y: scroll;
-    padding: 20px;
-    background-color: #f5f5f5;
+    margin-bottom: 10px;
+}
+
+.new-chat {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+}
+
+.new-chat img {
+    margin: 20px;
+    width: 80px;
+    color: #ccc;
+}
+
+.input-container {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow-y: hidden;
+}
+
+#loader {
+    text-align: center;
+}
+
+#loader span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 10px;
+    animation: loader 0.8s infinite alternate;
+}
+
+#loader span:nth-of-type(2) {
+    animation-delay: 0.2s;
+}
+
+#loader span:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loader {
+    0% {
+        opacity: 0.1;
+        transform: scale(0.2);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: scale(0.7);
+    }
 }
 
 .user-input {
-    display: flex;
+    flex: 1;
+    resize: none;
     padding: 10px;
-    background-color: #fff;
+    padding-right: 60px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    background-color: transparent;
+    box-sizing: border-box;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    min-height: 40px;
+    max-height: 150px;
+    line-height: 17px;
+    font-size: 15px;
+    padding-top: 24.5px;
+    padding-left: 30px;
 }
 
-input {
-    flex-grow: 1;
-    padding: 15px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button {
+.send-button {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #4caf50;
-    color: #fff;
-    transition: background-color 0.3s;
+    width: 40px;
+    padding-right: 50px;
 }
 
-button:hover {
-    background-color: #45a049;
+@media screen and (max-width: 760px) {
+    /* Add your responsive styles here */
 }
 
-/* Adjust the space between messages and different colors */
-.chat div {
-    margin-bottom: 15px;
+#history {
+    display: none;
 }
 
-/* Style for 'You' messages */
-/* .chat div.you {
-    text-align: right;
-    background-color: #aed581; /* Light Green color */
-    color: #2e7d32; /* Dark Green color */
-    padding: 10px;
-    border-radius: 5px;
-} */
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
 
-/* Add styles for 'User' messages */
-.chat div.user {
-    text-align: left;
-    background-color: #aed581; /* Light Green color */
-    color: #2e7d32; /* Dark Green color */
-    padding: 10px;
-    border-radius: 5px;
+    to {
+        transform: rotate(359deg);
+    }
 }
 
+.spinner-box {
+    align-self: center;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
 
-/* Add styles for 'Bot' messages */
-.chat div.bot {
-    text-align: left;
-    background-color: #90caf9; /* Light Blue color */
-    color: #1565c0; /* Dark Blue color */
-    padding: 10px;
-    border-radius: 5px;
+.circle-border {
+    width: 150px;
+    height: 150px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgb(63, 249, 220);
+    background: linear-gradient(0deg, rgba(63, 249, 220, 0.1) 33%, rgba(63, 249, 220, 1) 100%);
+    animation: spin 0.8s linear 0s infinite;
+}
+
+.circle-core {
+    width: 100%;
+    height: 100%;
+    background-color: #343541;
+    border-radius: 50%;
 }
